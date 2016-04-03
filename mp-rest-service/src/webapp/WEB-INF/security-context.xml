@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:security="http://www.springframework.org/schema/security"
+
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans-4.0.xsd
+        http://www.springframework.org/schema/context
+        http://www.springframework.org/schema/context/spring-context-4.0.xsd
+        http://www.springframework.org/schema/security
+        http://www.springframework.org/schema/security/spring-security-4.0.xsd">
+
+    <security:http auto-config="false" entry-point-ref="rabhiAuthenticationEntryPoint">
+        <security:intercept-url pattern="/signup*" access="permitAll" />
+        <security:intercept-url pattern="/**" access="isAuthenticated()" />
+        <security:custom-filter position="FORM_LOGIN_FILTER" ref="rabhiAuthenticationFilter"/>
+
+        <!--
+        <security:form-login login-page="/login"
+                             username-parameter="username"
+                             password-parameter="password"
+                             always-use-default-target="true"
+                             default-target-url="/welcome"
+                             login-processing-url="/j_spring_security_check" />
+                             -->
+        <security:logout logout-url="/logout"
+                         invalidate-session="true"
+                         delete-cookies="JSESSIONID"
+                         />
+
+        <security:session-management invalid-session-url="/sessionTimeout" >
+            <security:concurrency-control max-sessions="1"
+                                          error-if-maximum-exceeded="true" />
+        </security:session-management>
+
+
+        <security:csrf/>
+    </security:http>
+
+    <security:authentication-manager alias="authenticationManager">
+        <security:authentication-provider ref="authenticationProvider">
+        </security:authentication-provider>
+    </security:authentication-manager>
+
+    <security:debug />
+
+    <bean id="authenticationProvider" class="com.marketplace.mvc.security.domain.MpAuthenticationProvider"/>
+
+    <bean id="applicationContextFilter" class="com.marketplace.mvc.rest.filters.ApplicationContextFilter"/>
+
+    <bean id="rabhiSimpleUrlAuthenticationSuccessHandler" class="com.marketplace.mvc.security.domain.MpAuthenticationSuccessHandler"></bean>
+
+    <bean id="rabhiSimpleUrlAuthenticationFailureHandler" class="com.marketplace.mvc.security.domain.MpAuthenticationFailureHandler"></bean>
+
+    <bean id="rabhiAuthenticationEntryPoint" class="com.marketplace.mvc.security.domain.MpAuthenticationEntryPoint"/>
+    <bean id="rabhiAuthenticationFilter" class="com.marketplace.mvc.security.filter.MpAuthenticationFilter">
+        <property name="authenticationManager" ref="authenticationManager"/>
+        <property name="authenticationSuccessHandler" ref="rabhiSimpleUrlAuthenticationSuccessHandler"/>
+        <property name="authenticationFailureHandler" ref="rabhiSimpleUrlAuthenticationFailureHandler"/>
+    </bean>
+</beans>
