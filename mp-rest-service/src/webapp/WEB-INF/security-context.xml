@@ -12,8 +12,10 @@
         http://www.springframework.org/schema/security
         http://www.springframework.org/schema/security/spring-security-4.0.xsd">
 
-    <security:http auto-config="false" entry-point-ref="rabhiAuthenticationEntryPoint">
-        <security:intercept-url pattern="/signup*" access="permitAll" />
+    <security:http auto-config="false" entry-point-ref="mpAuthenticationEntryPoint">
+        <security:intercept-url pattern="/" access="permitAll" />
+        <security:intercept-url pattern="/getme*" access="permitAll" />
+        <security:intercept-url pattern="/signup"  access="permitAll"/>
         <security:intercept-url pattern="/**" access="isAuthenticated()" />
         <security:custom-filter position="FORM_LOGIN_FILTER" ref="rabhiAuthenticationFilter"/>
 
@@ -54,7 +56,7 @@
 
     <bean id="rabhiSimpleUrlAuthenticationFailureHandler" class="com.marketplace.mvc.security.domain.MpAuthenticationFailureHandler"></bean>
 
-    <bean id="rabhiAuthenticationEntryPoint" class="com.marketplace.mvc.security.domain.MpAuthenticationEntryPoint"/>
+    <bean id="mpAuthenticationEntryPoint" class="com.marketplace.mvc.security.domain.MpAuthenticationEntryPoint"/>
     <bean id="rabhiAuthenticationFilter" class="com.marketplace.mvc.security.filter.MpAuthenticationFilter">
         <property name="authenticationManager" ref="authenticationManager"/>
         <property name="authenticationSuccessHandler" ref="rabhiSimpleUrlAuthenticationSuccessHandler"/>

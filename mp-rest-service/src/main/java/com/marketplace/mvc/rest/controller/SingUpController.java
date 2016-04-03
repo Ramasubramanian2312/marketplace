@@ -28,5 +28,4 @@ public class SingUpController extends BaseController{
             return new CustomerRegister(custInfo.getUsername(), "Registered Successfully");
     }
 
-
 }
