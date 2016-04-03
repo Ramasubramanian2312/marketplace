@@ -3,8 +3,8 @@ package com.marketplace.mvc.rest.filters;
 import com.marketplace.mvc.domain.context.ApplicationContext;
 import com.marketplace.mvc.util.ThreadLocalApplicationContextHolder;
 import org.springframework.stereotype.Component;
+
 import javax.servlet.*;
-import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
 
@@ -18,12 +18,6 @@ public class ApplicationContextFilter implements Filter {
 
     public void doFilter(ServletRequest req, ServletResponse resp, FilterChain chain) throws ServletException, IOException {
         HttpServletRequest request = (HttpServletRequest) req;
-        Cookie[] cookies = request.getCookies();
-        for(Cookie cookie:cookies){
-            System.out.println(cookie.getValue());
-            cookie.setValue("564");
-            System.out.println(cookie.getMaxAge());
-        }
         ApplicationContext ac = new ApplicationContext();
         ac.setAppName("Abhilash");
         ThreadLocalApplicationContextHolder.setApplicationContext(ac);
