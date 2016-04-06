@@ -34,8 +34,9 @@ public class CustomerServiceImpl implements CustomerService{
         customerDaoImpl.save(customerDto.get());
     }
 
+    @Transactional(value="transactionManager", propagation = Propagation.REQUIRED)
     public boolean isExistsEmail(String email) {
-        return false;
+        return customerDaoImpl.isExistsEmail(email);
     }
 
     @Transactional(value="transactionManager", propagation = Propagation.REQUIRED)

@@ -9,6 +9,7 @@ import java.util.List;
  */
 public interface CustomerDao {
     public void save(CustomerDto c);
-
     public List<CustomerDto> list();
+    public boolean isExistsUsername(String username);
+    public boolean isExistsEmail(String email);
 }

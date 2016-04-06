@@ -50,4 +50,13 @@ public class CustomerDaoImpl implements CustomerDao {
         if(customerDtoList.size()>0)    return true;
         return false;
     }
+
+    public boolean isExistsEmail(String email) {
+        Session session = this.sessionFactory.getCurrentSession();
+        Query query = session.createQuery("from CustomerDto where emailId = ?");
+        List<CustomerDto> customerDtoList = query.setString(0, email).list();
+
+        if(customerDtoList.size()>0)    return true;
+        return false;
+    }
 }

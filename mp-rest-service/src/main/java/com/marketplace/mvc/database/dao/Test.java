@@ -12,6 +12,7 @@ public class Test {
         ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext("spring.xml");
         CustomerService customerService = (CustomerService) context.getBean("customerService");
         //customerService.registerCustomer("anu433", "AnupTe1st", "MS", "an1u3p@123.com");
-        //System.out.println(customerService.isExistsUsername("rama2314"));
+        //System.out.println(customerService.isExistsUsername("rama2312"));
+        //System.out.println(customerService.isExistsEmail("abc@123.com"));
     }
 }
