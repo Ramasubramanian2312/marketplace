@@ -3,7 +3,13 @@ package com.marketplace.mvc.domain.request;
 /**
  * Created by Abhi on 4/2/16.
  */
+
 public class CustomerInfo {
+
+    private String username;
+    private String firstName;
+    private String lastName;
+    private String emailId;
 
     public String getUsername() {
         return username;
@@ -13,8 +19,6 @@ public class CustomerInfo {
         this.username = username;
     }
 
-    private String username;
-
     public String getFirstName() {
         return firstName;
     }
@@ -22,8 +26,6 @@ public class CustomerInfo {
     public void setFirstName(String firstName) {
         this.firstName = firstName;
     }
-
-    private String firstName;
 
     public String getLastName() {
         return lastName;
@@ -33,8 +35,6 @@ public class CustomerInfo {
         this.lastName = lastName;
     }
 
-    private String lastName;
-
     public String getEmailId() {
         return emailId;
     }
@@ -42,7 +42,4 @@ public class CustomerInfo {
     public void setEmailId(String emailId) {
         this.emailId = emailId;
     }
-
-    private String emailId;
-
 }
