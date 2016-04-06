@@ -1,11 +1,14 @@
 package com.marketplace.mvc.database.dao;
 
 import com.marketplace.mvc.database.model.CustomerDto;
+import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -23,18 +26,28 @@ public class CustomerDaoImpl implements CustomerDao {
     }
 
     public void save(CustomerDto c) {
-        Session session = this.sessionFactory.openSession();
-        Transaction tx = session.beginTransaction();
+        Session session = this.sessionFactory.getCurrentSession();
+        //Transaction tx = session.beginTransaction();
         session.persist(c);
-        tx.commit();
-        session.close();
+        //tx.commit();
+        //session.close();
     }
 
     @SuppressWarnings("unchecked")
     public List<CustomerDto> list() {
         Session session = this.sessionFactory.openSession();
-        List<CustomerDto> customerDtoList = session.createQuery("from Customer").list();
+        List<CustomerDto> customerDtoList = session.createQuery("from CustomerDto").list();
         session.close();
         return customerDtoList;
+    }
+
+    @SuppressWarnings("unchecked")
+    public boolean isExistsUsername(String username) {
+        Session session = this.sessionFactory.getCurrentSession();
+        Query query = session.createQuery("from CustomerDto where username = ?");
+        List<CustomerDto> customerDtoList = query.setString(0, username).list();
+
+        if(customerDtoList.size()>0)    return true;
+        return false;
     }
 }

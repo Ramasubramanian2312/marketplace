@@ -5,4 +5,6 @@ package com.marketplace.mvc.database.service;
  */
 public interface CustomerService {
     public void registerCustomer(String userName, String firstName, String lastName, String email);
+    public boolean isExistsEmail(String email);
+    public boolean isExistsUsername(String username);
 }

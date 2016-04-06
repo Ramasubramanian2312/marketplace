@@ -1,7 +1,6 @@
 package com.marketplace.mvc.database.dao;
 
 import com.marketplace.mvc.database.service.CustomerService;
-import com.marketplace.mvc.database.service.CustomerServiceImpl;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 /**
@@ -11,7 +10,8 @@ public class Test {
     public static void main(String args[])
     {
         ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext("spring.xml");
-        CustomerService customerService = (CustomerServiceImpl) context.getBean("customerService");
-        customerService.registerCustomer("anup123", "Anup", "MS", "anup@123.com");
+        CustomerService customerService = (CustomerService) context.getBean("customerService");
+        //customerService.registerCustomer("anu433", "AnupTe1st", "MS", "an1u3p@123.com");
+        //System.out.println(customerService.isExistsUsername("rama2314"));
     }
 }

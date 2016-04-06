@@ -18,6 +18,9 @@ public class CustomerDto {
     private String lastName;
     private String emailId;
 
+    public CustomerDto() {
+    }
+
     public CustomerDto(String username, String firstName, String lastName, String emailId) {
         this.username = username;
         this.firstName = firstName;
