@@ -15,7 +15,7 @@
         <property name="driverClassName" value="com.mysql.jdbc.Driver" />
         <property name="url" value="jdbc:mysql://localhost:3306/marketplacedb" />
         <property name="username" value="root" />
-        <property name="password" value="PayPal88" />
+        <property name="password" value="gaurav" />
     </bean>
 
     <!-- Hibernate 3 Annotation SessionFactory Bean definition-->

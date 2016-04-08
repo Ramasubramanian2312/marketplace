@@ -17,16 +17,17 @@ import java.util.concurrent.atomic.AtomicReference;
 @Service("customerService")
 public class CustomerServiceImpl implements CustomerService{
 
+    @Autowired
     private CustomerDaoImpl customerDaoImpl;
 
-    public CustomerDaoImpl getCustomerDaoImpl() {
-        return customerDaoImpl;
-    }
+    //public CustomerDaoImpl getCustomerDaoImpl() {
+    //    return customerDaoImpl;
+    //}
 
-    @Autowired
-    public void setCustomerDaoImpl(CustomerDaoImpl customerDaoImpl) {
-        this.customerDaoImpl = customerDaoImpl;
-    }
+
+    //public void setCustomerDaoImpl(CustomerDaoImpl customerDaoImpl) {
+      //  this.customerDaoImpl = customerDaoImpl;
+    //}
 
     @Transactional(value="transactionManager", propagation = Propagation.REQUIRED)
     public void registerCustomer(String userName, String firstName, String lastName, String email) {
