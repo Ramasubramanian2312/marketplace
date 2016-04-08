@@ -15,7 +15,7 @@
         <property name="driverClassName" value="com.mysql.jdbc.Driver" />
         <property name="url" value="jdbc:mysql://localhost:3306/marketplacedb" />
         <property name="username" value="root" />
-        <property name="password" value="PayPal88" />
+        <property name="password" value="gaurav" />
     </bean>
 
     <!-- Hibernate 3 Annotation SessionFactory Bean definition-->
@@ -30,7 +30,7 @@
         <property name="hibernateProperties">
             <props>
                 <prop key="hibernate.dialect">org.hibernate.dialect.MySQLDialect</prop>
-                <!--<prop key="hibernate.current_session_context_class">thread</prop>-->
+                <!-- <prop key="hibernate.current_session_context_class">thread</prop> -->
                 <prop key="hibernate.show_sql">false</prop>
             </props>
         </property>

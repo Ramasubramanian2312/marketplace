@@ -5,6 +5,7 @@ import com.marketplace.mvc.domain.request.CustomerInfo;
 import com.marketplace.mvc.domain.strategy.CustomerValidationStrategyImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 /**
  * Created by Abhi on 4/3/16.

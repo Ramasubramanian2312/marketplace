@@ -27,17 +27,13 @@ public class CustomerDaoImpl implements CustomerDao {
 
     public void save(CustomerDto c) {
         Session session = this.sessionFactory.getCurrentSession();
-        //Transaction tx = session.beginTransaction();
         session.persist(c);
-        //tx.commit();
-        //session.close();
     }
 
     @SuppressWarnings("unchecked")
     public List<CustomerDto> list() {
-        Session session = this.sessionFactory.openSession();
+        Session session = this.sessionFactory.getCurrentSession();
         List<CustomerDto> customerDtoList = session.createQuery("from CustomerDto").list();
-        session.close();
         return customerDtoList;
     }
 
