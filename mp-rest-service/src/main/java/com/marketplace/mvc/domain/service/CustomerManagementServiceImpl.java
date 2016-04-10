@@ -20,6 +20,11 @@ public class CustomerManagementServiceImpl implements  CustomerManagementService
 
     public void registerCustomer(CustomerInfo customerInfo) {
         customerValidationStrategy.validateCustomer(customerInfo);
+        String userName = customerInfo.getUsername();
+        if(userName == null){
+            userName = "";
+        }
+        String firstName = customerInfo.getFirstName();
         customerService.registerCustomer(
                 customerInfo.getUsername(),
                 customerInfo.getFirstName(),
