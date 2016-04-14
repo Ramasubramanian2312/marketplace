@@ -8,8 +8,11 @@ import java.util.List;
  * Created by rchandrasekar on 4/5/2016.
  */
 public interface CustomerDao {
-    public void save(CustomerDto c);
-    public List<CustomerDto> list();
-    public boolean isExistsUsername(String username);
-    public boolean isExistsEmail(String email);
+    void save(CustomerDto c);
+    List<CustomerDto> list();
+    boolean isExistsUsername(String username);
+    boolean isExistsEmail(String email);
+    boolean isValidUser(String username, String password);
+    CustomerDto getCustomerByUsername(String username);
+    void update(CustomerDto c);
 }

@@ -25,6 +25,7 @@
         <property name="annotatedClasses">
             <list>
                 <value>com.marketplace.mvc.database.model.CustomerDto</value>
+                <value>com.marketplace.mvc.database.model.CustomerCredentialsDto</value>
             </list>
         </property>
         <property name="hibernateProperties">

@@ -4,7 +4,9 @@ package com.marketplace.mvc.database.service;
  * Created by rchandrasekar on 4/5/2016.
  */
 public interface CustomerService {
-    public void registerCustomer(String userName, String firstName, String lastName, String email);
-    public boolean isExistsEmail(String email);
-    public boolean isExistsUsername(String username);
+    void registerCustomer(String userName, String firstName, String lastName, String email);
+    boolean isExistsEmail(String email);
+    boolean isExistsUsername(String username);
+    boolean isValidCredentials(String username, String password);
+    boolean addOrUpdatePassword(String username, String password);
 }

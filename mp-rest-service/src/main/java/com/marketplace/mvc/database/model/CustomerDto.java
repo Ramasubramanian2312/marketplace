@@ -18,6 +18,9 @@ public class CustomerDto {
     private String lastName;
     private String emailId;
 
+    @OneToOne(mappedBy = "customerDto", cascade = CascadeType.ALL)
+    private CustomerCredentialsDto customerCredentialsDto;
+
     public CustomerDto() {
     }
 
@@ -28,11 +31,11 @@ public class CustomerDto {
         this.emailId = emailId;
     }
 
-    public int getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
@@ -68,6 +71,14 @@ public class CustomerDto {
         this.emailId = emailId;
     }
 
+    public CustomerCredentialsDto getCustomerCredentialsDto() {
+        return customerCredentialsDto;
+    }
+
+    public void setCustomerCredentialsDto(CustomerCredentialsDto customerCredentialsDto) {
+        this.customerCredentialsDto = customerCredentialsDto;
+    }
+
     @Override
     public String toString() {
         return "CustomerDto{" +
@@ -76,6 +87,7 @@ public class CustomerDto {
                 ", firstName='" + firstName + '\'' +
                 ", lastName='" + lastName + '\'' +
                 ", emailId='" + emailId + '\'' +
+                ", customerCredentialsDto=" + customerCredentialsDto +
                 '}';
     }
 }
