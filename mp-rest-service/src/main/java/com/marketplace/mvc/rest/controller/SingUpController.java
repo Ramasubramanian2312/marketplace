@@ -1,6 +1,7 @@
 package com.marketplace.mvc.rest.controller;
 
 import com.marketplace.mvc.domain.exceptions.InvalidUserNameException;
+import com.marketplace.mvc.domain.exceptions.MpBadRequestException;
 import com.marketplace.mvc.domain.exceptions.UserNameAlreadyExistsException;
 import com.marketplace.mvc.domain.request.CustomerInfo;
 import com.marketplace.mvc.domain.response.CustomerRegister;
@@ -47,6 +48,12 @@ public class SingUpController extends BaseController{
     @ResponseStatus(HttpStatus.NOT_FOUND)
     @ExceptionHandler({UserNameAlreadyExistsException.class})
     public void handleUserNameAlreadyExistsExeption (UserNameAlreadyExistsException e){
+
+    }
+
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    @ExceptionHandler({MpBadRequestException.class})
+    public void badRequestException (MpBadRequestException e){
 
     }
 
