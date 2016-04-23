@@ -6,4 +6,7 @@ package com.marketplace.mvc.rest;
 public interface RequestMappingConstants {
 
      public final String SIGNUP = "/signup";
+     public final String IS_EXISTING_EMAIL = "/isexistingemail/{emailId}";
+     public final String IS_EXISTING_USERNAME = "/isexistingusername/{username}";
+
 }

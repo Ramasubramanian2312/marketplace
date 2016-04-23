@@ -11,6 +11,8 @@ public class CustomerInfo {
     private String lastName;
     private String emailId;
 
+    private String password;
+
     public String getUsername() {
         return username;
     }
@@ -42,4 +44,13 @@ public class CustomerInfo {
     public void setEmailId(String emailId) {
         this.emailId = emailId;
     }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
 }

@@ -1,4 +1,4 @@
-package com.marketplace.mvc.rest.controller;
+package com.marketplace.mvc.rest.controller.signup;
 
 import com.marketplace.mvc.domain.exceptions.InvalidUserNameException;
 import com.marketplace.mvc.domain.exceptions.MpBadRequestException;
@@ -7,6 +7,7 @@ import com.marketplace.mvc.domain.request.CustomerInfo;
 import com.marketplace.mvc.domain.response.CustomerRegister;
 import com.marketplace.mvc.domain.service.CustomerManagementService;
 import com.marketplace.mvc.rest.RequestMappingConstants;
+import com.marketplace.mvc.rest.controller.BaseController;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
@@ -24,7 +25,7 @@ import javax.servlet.http.HttpServletResponse;
  */
 @Controller
 @RequestMapping("/")
-public class SingUpController extends BaseController{
+public class SignUpController extends BaseController {
 
     @Autowired
     private CustomerManagementService customerManagementService;
@@ -45,17 +46,7 @@ public class SingUpController extends BaseController{
         return new CustomerRegister(custInfo.getUsername(), "Registered successfully");
     }
 
-    @ResponseStatus(HttpStatus.NOT_FOUND)
-    @ExceptionHandler({UserNameAlreadyExistsException.class})
-    public void handleUserNameAlreadyExistsExeption (UserNameAlreadyExistsException e){
 
-    }
-
-    @ResponseStatus(HttpStatus.BAD_REQUEST)
-    @ExceptionHandler({MpBadRequestException.class})
-    public void badRequestException (MpBadRequestException e){
-
-    }
 
 
 }

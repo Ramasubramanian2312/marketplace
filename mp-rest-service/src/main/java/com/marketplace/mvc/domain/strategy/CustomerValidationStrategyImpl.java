@@ -1,9 +1,11 @@
 package com.marketplace.mvc.domain.strategy;
 
+import com.marketplace.mvc.database.service.CustomerService;
 import com.marketplace.mvc.domain.exceptions.MpBadRequestException;
 import com.marketplace.mvc.domain.exceptions.UserNameAlreadyExistsException;
 import com.marketplace.mvc.domain.exceptions.EmailAlreadyExistsException;
 import com.marketplace.mvc.domain.request.CustomerInfo;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 /**
@@ -11,6 +13,9 @@ import org.springframework.stereotype.Service;
  */
 @Service("customerValidationStrategy")
 public class CustomerValidationStrategyImpl implements CustomerValidationStrategy {
+
+    @Autowired
+    private CustomerService customerService;
 
     public void validateCustomer(CustomerInfo custInfo){
 
@@ -22,7 +27,6 @@ public class CustomerValidationStrategyImpl implements CustomerValidationStrateg
         validateRequest(username, firstName, lastName, emailId);
         isExistsUserName(username.trim());
         isExistsEmailId(custInfo.getEmailId());
-
 
     }
 
@@ -39,13 +43,14 @@ public class CustomerValidationStrategyImpl implements CustomerValidationStrateg
 
     public void isExistsUserName(String userName){
 
-        if(userName.equals("Anup")) {
+        if(customerService.isExistsUsername(userName)){
             throw new UserNameAlreadyExistsException("Username already exists");
         }
     }
 
-    public void isExistsEmailId(String userName){
+    public void isExistsEmailId(String emailId){
 
+        if(customerService.isExistsEmail(emailId))
            throw new EmailAlreadyExistsException("Email ID already exists");
     }
 

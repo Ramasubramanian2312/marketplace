@@ -30,5 +30,6 @@ public class CustomerManagementServiceImpl implements  CustomerManagementService
                 customerInfo.getFirstName(),
                 customerInfo.getLastName(),
                 customerInfo.getEmailId());
+        customerService.addOrUpdatePassword(customerInfo.getUsername(), customerInfo.getPassword());
     }
 }
