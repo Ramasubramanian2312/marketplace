@@ -76,6 +76,7 @@ public class CustomerDaoImpl implements CustomerDao {
     @SuppressWarnings("unchecked")
     @Transactional(propagation = Propagation.REQUIRED)
     public boolean isValidUser(String username, String password) {
+        System.out.println(username + " | " + password);
         Session session = this.sessionFactory.getCurrentSession();
         Query query = session.createQuery("from CustomerDto where username = ?");
         CustomerDto customerDto = (CustomerDto) query.setString(0, username).uniqueResult();
