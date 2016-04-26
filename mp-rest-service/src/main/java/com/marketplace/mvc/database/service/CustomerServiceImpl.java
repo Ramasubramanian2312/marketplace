@@ -1,9 +1,14 @@
 package com.marketplace.mvc.database.service;
 
+import com.marketplace.mvc.database.dao.CustomerCredentialsDao;
+import com.marketplace.mvc.database.dao.CustomerCredentialsDaoImpl;
 import com.marketplace.mvc.database.dao.CustomerDao;
 import com.marketplace.mvc.database.dao.CustomerDaoImpl;
 import com.marketplace.mvc.database.model.CustomerCredentialsDto;
 import com.marketplace.mvc.database.model.CustomerDto;
+import com.marketplace.mvc.database.model.SaleItemDto;
+import com.marketplace.mvc.database.model.SaleItemType;
+import org.hibernate.Hibernate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
@@ -19,6 +24,8 @@ public class CustomerServiceImpl implements CustomerService{
 
     @Autowired
     private CustomerDao customerDao;
+    @Autowired
+    private CustomerCredentialsDao customerCredentialsDao;
 
     @Transactional(value="transactionManager", propagation = Propagation.REQUIRES_NEW)
     public void registerCustomer(String userName, String firstName, String lastName, String email) {
@@ -47,12 +54,28 @@ public class CustomerServiceImpl implements CustomerService{
     @Transactional(value="transactionManager", propagation = Propagation.REQUIRES_NEW)
     public boolean addOrUpdatePassword(String username, String password) {
         if(isExistsUsername(username)) {
+            System.out.println("In ---> Working");
             CustomerDto customerDto = customerDao.getCustomerByUsername(username);
-            CustomerCredentialsDto customerCredentialsDto = new CustomerCredentialsDto(password);
+            CustomerCredentialsDto customerCredentialsDto = customerCredentialsDao.getByPrimaryKey(customerDto.getId());
+            customerCredentialsDto.setPassword(password);
             customerDto.setCustomerCredentialsDto(customerCredentialsDto);
             customerCredentialsDto.setCustomerDto(customerDto);
             customerDao.update(customerDto);
+            return true;
         }
         return false;
+    }
+
+    @Transactional(value="transactionManager", propagation = Propagation.REQUIRES_NEW)
+    public void addItem(String username, String itemName, String type) {
+        if(isExistsUsername(username)) {
+            CustomerDto customerDto = customerDao.getCustomerByUsername(username);
+            SaleItemDto saleItemDto = new SaleItemDto();
+            saleItemDto.setName(itemName);
+            saleItemDto.setType(SaleItemType.valueOf(type));
+            Hibernate.initialize(customerDto.getSaleItemDtoList());
+            saleItemDto.setCustomerDto(customerDto);
+            customerDao.update(customerDto);
+        }
     }
 }

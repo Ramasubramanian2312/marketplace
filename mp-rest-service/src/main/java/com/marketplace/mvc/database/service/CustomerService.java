@@ -9,4 +9,5 @@ public interface CustomerService {
     boolean isExistsUsername(String username);
     boolean isValidCredentials(String username, String password);
     boolean addOrUpdatePassword(String username, String password);
+    void addItem(String username, String itemName, String type);
 }

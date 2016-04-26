@@ -1,6 +1,8 @@
 package com.marketplace.mvc.database.model;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by rchandrasekar on 4/5/2016.
@@ -20,6 +22,9 @@ public class CustomerDto {
 
     @OneToOne(mappedBy = "customerDto", cascade = CascadeType.ALL)
     private CustomerCredentialsDto customerCredentialsDto;
+
+    @OneToMany(mappedBy = "customerDto", cascade = CascadeType.ALL)
+    private List<SaleItemDto> saleItemDtoList = new ArrayList<SaleItemDto>();
 
     public CustomerDto() {
     }
@@ -77,6 +82,14 @@ public class CustomerDto {
 
     public void setCustomerCredentialsDto(CustomerCredentialsDto customerCredentialsDto) {
         this.customerCredentialsDto = customerCredentialsDto;
+    }
+
+    public List<SaleItemDto> getSaleItemDtoList() {
+        return saleItemDtoList;
+    }
+
+    public void setSaleItemDtoList(List<SaleItemDto> saleItemDtoList) {
+        this.saleItemDtoList = saleItemDtoList;
     }
 
     @Override
