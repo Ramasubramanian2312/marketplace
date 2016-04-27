@@ -1,6 +1,10 @@
 package com.marketplace.mvc.database.model;
 
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
+
 import javax.persistence.*;
+import java.util.Date;
 
 /**
  * Created by rchandrasekar on 4/20/2016.
@@ -19,6 +23,17 @@ public class SaleItemDto {
     @Column(name = "type")
     @Enumerated(EnumType.STRING)
     private SaleItemType type;
+
+    @Column(name = "price")
+    private float price;
+
+    @Column(name = "date_created", nullable = false)
+    @CreationTimestamp
+    private Date created;
+
+    @Column(name = "date_modified", nullable = false)
+    @UpdateTimestamp
+    private Date modified;
 
     @ManyToOne
     @JoinColumn(name = "user_id", referencedColumnName = "id")
@@ -51,6 +66,14 @@ public class SaleItemDto {
     public CustomerDto getCustomerDto() {
         return customerDto;
     }
+
+    public Date getCreated() { return created; }
+
+    public void setCreated(Date created) { this.created = created; }
+
+    public Date getModified() { return modified; }
+
+    public void setModified(Date modified) { this.modified = modified; }
 
     public void setCustomerDto(CustomerDto customerDto) {
         this.customerDto = customerDto;

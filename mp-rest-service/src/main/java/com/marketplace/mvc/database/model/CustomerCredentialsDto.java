@@ -18,6 +18,8 @@ public class CustomerCredentialsDto {
     @GeneratedValue(generator = "gen")
     @GenericGenerator(name = "gen", strategy = "foreign", parameters = @Parameter(name = "property", value = "customerDto"))
     private int id;
+
+    @Column(name = "password")
     private String password;
 
     @OneToOne

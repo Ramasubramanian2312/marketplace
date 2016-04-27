@@ -14,6 +14,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
 import java.util.concurrent.atomic.AtomicReference;
 
 /**
@@ -66,16 +67,5 @@ public class CustomerServiceImpl implements CustomerService{
         return false;
     }
 
-    @Transactional(value="transactionManager", propagation = Propagation.REQUIRES_NEW)
-    public void addItem(String username, String itemName, String type) {
-        if(isExistsUsername(username)) {
-            CustomerDto customerDto = customerDao.getCustomerByUsername(username);
-            SaleItemDto saleItemDto = new SaleItemDto();
-            saleItemDto.setName(itemName);
-            saleItemDto.setType(SaleItemType.valueOf(type));
-            Hibernate.initialize(customerDto.getSaleItemDtoList());
-            saleItemDto.setCustomerDto(customerDto);
-            customerDao.update(customerDto);
-        }
-    }
+
 }

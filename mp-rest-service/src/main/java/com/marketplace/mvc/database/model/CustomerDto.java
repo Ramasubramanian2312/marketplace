@@ -15,15 +15,23 @@ public class CustomerDto {
     @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
+
+    @Column(name = "username")
     private String username;
+
+    @Column(name = "firstname")
     private String firstName;
+
+    @Column(name = "lastname")
     private String lastName;
+
+    @Column(name = "emailid")
     private String emailId;
 
     @OneToOne(mappedBy = "customerDto", cascade = CascadeType.ALL)
     private CustomerCredentialsDto customerCredentialsDto;
 
-    @OneToMany(mappedBy = "customerDto", cascade = CascadeType.ALL)
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "customerDto", cascade = CascadeType.ALL)
     private List<SaleItemDto> saleItemDtoList = new ArrayList<SaleItemDto>();
 
     public CustomerDto() {}

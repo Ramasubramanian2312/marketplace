@@ -1,8 +1,8 @@
 package com.marketplace.mvc.database.dao;
 
 import com.marketplace.mvc.database.model.CustomerCredentialsDto;
+import org.hibernate.Session;
 import org.hibernate.SessionFactory;
-import org.hibernate.classic.Session;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
