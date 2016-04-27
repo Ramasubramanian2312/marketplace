@@ -26,8 +26,7 @@ public class CustomerDto {
     @OneToMany(mappedBy = "customerDto", cascade = CascadeType.ALL)
     private List<SaleItemDto> saleItemDtoList = new ArrayList<SaleItemDto>();
 
-    public CustomerDto() {
-    }
+    public CustomerDto() {}
 
     public CustomerDto(String username, String firstName, String lastName, String emailId) {
         this.username = username;

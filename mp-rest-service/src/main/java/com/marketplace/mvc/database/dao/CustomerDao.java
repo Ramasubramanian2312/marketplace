@@ -9,10 +9,10 @@ import java.util.List;
  */
 public interface CustomerDao {
     void save(CustomerDto c);
+    void update(CustomerDto c);
+    CustomerDto getCustomerByUsername(String username);
     List<CustomerDto> list();
     boolean isExistsUsername(String username);
     boolean isExistsEmail(String email);
     boolean isValidUser(String username, String password);
-    CustomerDto getCustomerByUsername(String username);
-    void update(CustomerDto c);
 }

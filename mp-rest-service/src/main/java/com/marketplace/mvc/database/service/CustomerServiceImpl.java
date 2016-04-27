@@ -38,29 +38,29 @@ public class CustomerServiceImpl implements CustomerService{
         return customerDao.isExistsEmail(email);
     }
 
-    @Transactional(value="transactionManager", propagation = Propagation.REQUIRES_NEW)
-    public boolean isExistsUsername(String username) {
-        return customerDao.isExistsUsername(username);
-    }
+    @Transactional(readOnly = true)
+    public boolean isExistsUsername(String username) { return customerDao.isExistsUsername(username); }
 
-    @Transactional(value="transactionManager", propagation = Propagation.REQUIRES_NEW)
+    @Transactional(readOnly = true)
     public boolean isValidCredentials(String username, String password) {
-        if(isExistsUsername(username)){
+        if(isExistsUsername(username))
             return customerDao.isValidUser(username, password);
-        }
         return false;
     }
 
     @Transactional(value="transactionManager", propagation = Propagation.REQUIRES_NEW)
     public boolean addOrUpdatePassword(String username, String password) {
         if(isExistsUsername(username)) {
-            System.out.println("In ---> Working");
+            System.out.println("Username match found...Attempt to set password...");
             CustomerDto customerDto = customerDao.getCustomerByUsername(username);
             CustomerCredentialsDto customerCredentialsDto = customerCredentialsDao.getByPrimaryKey(customerDto.getId());
+            if(customerCredentialsDto == null)
+                customerCredentialsDto = new CustomerCredentialsDto(password);
             customerCredentialsDto.setPassword(password);
             customerDto.setCustomerCredentialsDto(customerCredentialsDto);
             customerCredentialsDto.setCustomerDto(customerDto);
             customerDao.update(customerDto);
+            System.out.println("Password update successful!");
             return true;
         }
         return false;

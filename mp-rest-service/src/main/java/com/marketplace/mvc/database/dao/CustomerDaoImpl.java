@@ -22,14 +22,22 @@ public class CustomerDaoImpl implements CustomerDao {
     @Autowired
     private SessionFactory sessionFactory;
 
-    @Transactional(propagation = Propagation.REQUIRED)
+    @SuppressWarnings("unchecked")
+    @Transactional(propagation = Propagation.MANDATORY)
     public void save(CustomerDto c) {
         Session session = this.sessionFactory.getCurrentSession();
         session.persist(c);
     }
 
     @SuppressWarnings("unchecked")
-    @Transactional(propagation = Propagation.REQUIRED)
+    @Transactional(propagation = Propagation.MANDATORY)
+    public void update(CustomerDto c) {
+        Session session = this.sessionFactory.getCurrentSession();
+        session.saveOrUpdate(c);
+    }
+
+    @SuppressWarnings("unchecked")
+    @Transactional(readOnly = true)
     public CustomerDto getCustomerByUsername(String username) {
         Session session = this.sessionFactory.getCurrentSession();
         Query query = session.createQuery("from CustomerDto where username = ?");
@@ -37,14 +45,8 @@ public class CustomerDaoImpl implements CustomerDao {
         return customerDto;
     }
 
-    @Transactional(propagation = Propagation.REQUIRED)
-    public void update(CustomerDto c) {
-        Session session = this.sessionFactory.getCurrentSession();
-        session.saveOrUpdate(c);
-    }
-
     @SuppressWarnings("unchecked")
-    @Transactional(propagation = Propagation.REQUIRED)
+    @Transactional(readOnly = true)
     public List<CustomerDto> list() {
         Session session = this.sessionFactory.getCurrentSession();
         List<CustomerDto> customerDtoList = session.createQuery("from CustomerDto").list();
@@ -52,7 +54,7 @@ public class CustomerDaoImpl implements CustomerDao {
     }
 
     @SuppressWarnings("unchecked")
-    @Transactional(propagation = Propagation.REQUIRED)
+    @Transactional(readOnly = true)
     public boolean isExistsUsername(String username) {
         Session session = this.sessionFactory.getCurrentSession();
         Query query = session.createQuery("from CustomerDto where username = ?");
@@ -63,7 +65,7 @@ public class CustomerDaoImpl implements CustomerDao {
     }
 
     @SuppressWarnings("unchecked")
-    @Transactional(propagation = Propagation.REQUIRED)
+    @Transactional(readOnly = true)
     public boolean isExistsEmail(String email) {
         Session session = this.sessionFactory.getCurrentSession();
         Query query = session.createQuery("from CustomerDto where emailId = ?");
@@ -74,7 +76,7 @@ public class CustomerDaoImpl implements CustomerDao {
     }
 
     @SuppressWarnings("unchecked")
-    @Transactional(propagation = Propagation.REQUIRED)
+    @Transactional(readOnly = true)
     public boolean isValidUser(String username, String password) {
         System.out.println(username + " | " + password);
         Session session = this.sessionFactory.getCurrentSession();
@@ -84,7 +86,6 @@ public class CustomerDaoImpl implements CustomerDao {
                 && customerDto.getCustomerCredentialsDto().getPassword().equals(password)){
             return true;
         }
-
         return false;
     }
 }

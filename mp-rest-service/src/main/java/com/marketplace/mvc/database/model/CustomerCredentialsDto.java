@@ -24,8 +24,7 @@ public class CustomerCredentialsDto {
     @PrimaryKeyJoinColumn
     private CustomerDto customerDto;
 
-    public CustomerCredentialsDto() {
-    }
+    public CustomerCredentialsDto() {}
 
     public CustomerCredentialsDto(String password) {
         this.password = password;
