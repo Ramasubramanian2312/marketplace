@@ -18,14 +18,15 @@ public class CustomerCredentialsDto {
     @GeneratedValue(generator = "gen")
     @GenericGenerator(name = "gen", strategy = "foreign", parameters = @Parameter(name = "property", value = "customerDto"))
     private int id;
+
+    @Column(name = "password")
     private String password;
 
     @OneToOne
     @PrimaryKeyJoinColumn
     private CustomerDto customerDto;
 
-    public CustomerCredentialsDto() {
-    }
+    public CustomerCredentialsDto() {}
 
     public CustomerCredentialsDto(String password) {
         this.password = password;
