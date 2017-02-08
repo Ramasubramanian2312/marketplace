@@ -39,7 +39,6 @@ public class MpAuthenticationFilter extends AbstractAuthenticationProcessingFilt
         System.out.println(request.getParameterMap().size());
         String requestUsername = request.getParameter(username);
         String requestPassword = request.getParameter(password);
-        System.out.println("WHAT THE FUCK ! " + requestUsername + "|"+requestPassword);
         List<GrantedAuthority> grantedAuthorities = new ArrayList<GrantedAuthority>();
         grantedAuthorities.add(new SimpleGrantedAuthority("ROLE_USER"));
         MpAuthenticationToken rat = new MpAuthenticationToken(requestUsername, requestPassword, grantedAuthorities);
