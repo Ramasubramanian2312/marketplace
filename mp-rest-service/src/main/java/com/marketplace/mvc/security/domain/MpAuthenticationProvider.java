@@ -24,7 +24,6 @@ public class MpAuthenticationProvider implements AuthenticationProvider {
         MpAuthenticationToken mpauthenticationToken = (MpAuthenticationToken) authentication;
         String username = (String)mpauthenticationToken.getPrincipal();
         String password = (String)mpauthenticationToken.getCredentials();
-        System.out.println("WHAT THE FUCK");
         if(customerService.isValidCredentials(username, password)){
                 System.out.println("AM HRERERE");
         }
